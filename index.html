@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Project101</title>
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="assets/img/icon.ico"
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=B612+Mono:ital,wght@0,400;0,700;1,400;1,700&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Feather Icons -->
+    <script src="https://unpkg.com/feather-icons"></script>
+
+    <!-- Style -->
+    <link rel="stylesheet" href="style.css" />
+
+    <!-- AlpineJS -->
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"
+    ></script>
+
+    <!-- App -->
+    <script src="assets/src/app.js" async></script>
+  </head>
+
+  <body>
+    <!-- Navbar Start -->
+    <nav class="navbar" x-data>
+      <a href="#" class="navbar-logo">Rugian<span>Bookstore</span></a>
+
+      <div class="navbar-nav">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#project">Best Seller</a>
+        <a href="#catalog">Books</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="navbar-extra">
+        <a href="#" id="search"><i data-feather="search"></i></a>
+        <a href="#" id="cart">
+          <i data-feather="shopping-cart"></i>
+          <span
+            class="quantity-notif"
+            x-show="$store.cart.quantity"
+            x-text="$store.cart.quantity"
+          ></span>
+        </a>
+        <a href="#" id="menu"><i data-feather="menu"></i></a>
+      </div>
+
+      <!-- Search Form Start -->
+      <div class="search-form">
+        <input type="search" id="search-box" placeholder="Search here.." />
+        <label for="search-box"> <i data-feather="search"></i></label>
+      </div>
+      <!-- Search Form End -->
+
+      <!-- Shopping Cart Start -->
+      <div class="shopping-cart">
+        <template x-for="(item,index) in $store.cart.items" x-key="index">
+          <div class="cart-item">
+            <img :src="`assets/img/catalog/${item.img}`" :alt="item.name" />
+            <div class="item-detail">
+              <h3 x-text="item.name"></h3>
+              <div class="item-price">
+                <span x-text="rupiah(item.price)"></span> &times;
+                <button id="remove" @click="$store.cart.remove(item.id)">
+                  &minus;
+                </button>
+                <span x-text="item.quantity"></span>
+                <button id="add" @click="$store.cart.add(item)">&plus;</button>
+                &equals;
+                <span x-text="rupiah(item.total)"></span>
+              </div>
+            </div>
+          </div>
+        </template>
+
+        <h4 x-show="!$store.cart.items.length" id="empty">
+          -- Cart is Empty --
+        </h4>
+        <h4 x-show="$store.cart.items.length">
+          Total : <span x-text="rupiah($store.cart.total)"></span>
+        </h4>
+
+        <!-- Form -->
+        <div class="form-container" x-show="$store.cart.items.length">
+          <form action="" id="checkoutForm">
+            <h5>Customer Detail</h5>
+
+            <label for="name">
+              <span>Name</span>
+              <input type="text" name="name" id="name" placeholder="Name" />
+            </label>
+            <label for="email">
+              <span>E-mail</span>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                placeholder="E-mail"
+              />
+            </label>
+            <label for="phone">
+              <span>Phone</span>
+              <input
+                type="number"
+                name="phone"
+                id="phone"
+                autocomplete="off"
+                placeholder="Phone Number"
+              />
+            </label>
+
+            <button
+              class="checkout-button"
+              type="submit"
+              id="checkout-button"
+              value="checkout"
+            >
+              Checkout
+            </button>
+          </form>
+        </div>
+      </div>
+      <!-- Shopping Cart End -->
+    </nav>
+
+    <!-- Navbar End -->
+
+    <!-- Hero Section Start -->
+    <section class="hero" id="home">
+      <main class="content">
+        <div class="slogan">
+          <span>#</span>
+          <h1>RugiKalau<br />EnggakBaca</h1>
+        </div>
+
+        <p>Mari tingkatkan budaya literasi di negeri kita tercinta</p>
+        <a href="#catalog" class="cta">Mulai Baca!</a>
+      </main>
+    </section>
+    <!-- Hero Section End -->
+
+    <!-- Features Section Start -->
+    <section class="features">
+      <div class="feature-item">
+        <svg
+          width="70"
+          height="70"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="assets/img/feather-sprite.svg#check-circle" />
+        </svg>
+        <p>Pasti<br />Orisinal</p>
+      </div>
+      <div class="feature-item">
+        <svg
+          width="70"
+          height="70"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="assets/img/feather-sprite.svg#credit-card" />
+        </svg>
+        <p>Pembayaran<br />Aman</p>
+      </div>
+      <div class="feature-item">
+        <svg
+          width="70"
+          height="70"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="assets/img/feather-sprite.svg#shield" />
+        </svg>
+        <p>Garansi<br />Pembelian</p>
+      </div>
+      <div class="feature-item">
+        <svg
+          width="70"
+          height="70"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="assets/img/feather-sprite.svg#truck" />
+        </svg>
+        <p>Bebas<br />Ongkir</p>
+      </div>
+      <div class="feature-item">
+        <svg
+          width="70"
+          height="70"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <use href="assets/img/feather-sprite.svg#globe" />
+        </svg>
+        <p>International<br />Shipping</p>
+      </div>
+    </section>
+    <!-- Features Section End -->
+
+    <!-- About Section Start -->
+    <section class="about" id="about">
+      <h2><span>About</span> Us</h2>
+
+      <div class="row">
+        <div class="about-img">
+          <img src="assets/img/about.jpg" alt="About" />
+        </div>
+        <div class="content">
+          <h3>Philosophy of Rugian Bookstore</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas
+            debitis nobis molestias amet neque architecto?
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ducimus
+            ipsam maiores quisquam.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
+            excepturi tenetur, accusantium ab dolore fugiat autem placeat rem
+            cumque pariatur.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- About Section End -->
+
+    <!-- Project Section Start -->
+    <section class="project" id="project">
+      <h2><span>Best</span> Seller</h2>
+      <p>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Distinctio aut
+        culpa temporibus harum earum cupiditate ad voluptates incidunt illo
+        quibusdam.
+      </p>
+
+      <div class="row">
+        <div class="project-card">
+          <img
+            src="assets/img/project/1.jpeg"
+            alt="Project 1"
+            class="project-img"
+          />
+          <h3 class="card-title">- Project 1 -</h3>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus,
+            illum.
+          </p>
+        </div>
+        <div class="project-card">
+          <img
+            src="assets/img/project/2.jpg"
+            alt="Project 2"
+            class="project-img"
+          />
+          <h3 class="card-title">- Project 2 -</h3>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus,
+            illum.
+          </p>
+        </div>
+        <div class="project-card">
+          <img
+            src="assets/img/project/3.jpg"
+            alt="Project 3"
+            class="project-img"
+          />
+          <h3 class="card-title">- Project 3 -</h3>
+          <p class="card-text">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Natus,
+            illum.
+          </p>
+        </div>
+      </div>
+    </section>
+    <!-- Project Section End -->
+
+    <!-- Catalog Section Start -->
+    <section class="catalog" id="catalog" x-data="products">
+      <h2><span>Our</span> Books</h2>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Totam illum
+        quisquam iste molestias hic et.
+      </p>
+
+      <div class="row">
+        <template x-for="(item,index) in items" x-key="index">
+          <div class="catalog-card">
+            <div class="catalog-icon">
+              <a href="#" @click.prevent="$store.cart.add(item)">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#shopping-cart" />
+                </svg>
+              </a>
+
+              <a href="#" class="info-button" @click="info">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#info" />
+                </svg>
+              </a>
+            </div>
+
+            <div class="catalog-image">
+              <img :src="`assets/img/catalog/${item.img}`" :alt="item.name" />
+            </div>
+
+            <div class="catalog-content">
+              <h3 x-text="item.name"></h3>
+              <div class="star">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+              </div>
+              <div class="price"><span x-text="rupiah(item.price)"></span></div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </section>
+    <!-- Catalog Section End -->
+
+    <!-- Modal box Start -->
+    <div class="modal" id="item-detail-modal" x-data="modalBox">
+      <template x-for="(item,index) in items" :key="index">
+        <div class="modal-container">
+          <a href="#" class="close-icon">
+            <svg
+              width="24"
+              height="24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <use href="assets/img/feather-sprite.svg#x" />
+            </svg>
+          </a>
+          <div class="modal-content">
+            <img :src="`assets/img/catalog/${item.img}`" :alt="item.name" />
+            <div class="catalog-content">
+              <h4 x-text="item.name"></h4>
+              <p>
+                Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                Numquam unde fuga dicta nisi ab molestiae asperiores adipisci
+                praesentium consectetur! Quasi debitis molestias ullam odit
+                veritatis?
+              </p>
+              <div class="star">
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+                <svg
+                  width="24"
+                  height="24"
+                  fill="currentColor"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#star" />
+                </svg>
+              </div>
+              <div class="price"><span x-text="rupiah(item.price)"></span></div>
+              <a href="#" @click.prevent="$store.cart.add(item)"
+                ><svg
+                  width="24"
+                  height="24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <use href="assets/img/feather-sprite.svg#shopping-cart" />
+                </svg>
+                <span>Add to Cart</span></a
+              >
+            </div>
+          </div>
+        </div>
+      </template>
+    </div>
+    <!-- Modal box End -->
+
+    <!-- Contact Section Start -->
+    <section class="contact" id="contact">
+      <h2><span>Our</span> Contact</h2>
+      <p>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Amet, iure!
+      </p>
+
+      <div class="row">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d31726.215089467292!2d106.735231!3d-6.2930267!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f0213739f16b%3A0x277c1f93d2f2c596!2sKec.%20Ciputat%20Tim.%2C%20Kota%20Tangerang%20Selatan%2C%20Banten!5e0!3m2!1sid!2sid!4v1737422285097!5m2!1sid!2sid"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          class="map"
+        ></iframe>
+
+        <form action="">
+          <div class="input-group">
+            <i data-feather="user"></i>
+            <input type="text" placeholder="Name" />
+          </div>
+          <div class="input-group">
+            <i data-feather="mail"></i>
+            <input type="text" placeholder="E-mail" />
+          </div>
+          <div class="input-group">
+            <i data-feather="phone"></i>
+            <input type="text" placeholder="Phone Number" />
+          </div>
+          <button type="submit" class="btn">Send</button>
+        </form>
+      </div>
+    </section>
+    <!-- Contact Section End -->
+
+    <!-- Footer Start -->
+    <footer>
+      <div class="social">
+        <a href="#"><i data-feather="instagram"></i></a>
+        <a href="#"><i data-feather="twitter"></i></a>
+        <a href="#"><i data-feather="facebook"></i></a>
+      </div>
+
+      <div class="links">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#project">Project</a>
+        <a href="#catalog">Catalog</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+      <div class="credit">
+        <p>
+          Created by
+          <a href="https://www.instagram.com/ruslikurnia_/" target="_blank"
+            >Rugian Bookstore</a
+          >. | &copy; 2025.
+        </p>
+      </div>
+    </footer>
+    <!-- Footer End -->
+
+    <!-- JavaScript -->
+    <script src="script.js"></script>
+    <script>
+      function info(e) {
+        const itemDetailModal = document.querySelector("#item-detail-modal");
+        const itemDetailButton = document.querySelectorAll(".info-button");
+
+        itemDetailButton.forEach((btn) => {
+          btn.onclick = (e) => {
+            itemDetailModal.style.display = "block";
+            e.preventDefault();
+          };
+        });
+
+        const closeModal = document.querySelectorAll(".modal .close-icon");
+
+        closeModal.forEach((x) => {
+          x.onclick = (e) => {
+            itemDetailModal.style.display = "none";
+            e.preventDefault();
+          };
+        });
+
+        window.onclick = (e) => {
+          if (e.target === itemDetailModal) {
+            itemDetailModal.style.display = "none";
+          }
+        };
+      }
+    </script>
+
+    <!-- Feather Icons -->
+    <script>
+      feather.replace();
+    </script>
+  </body>
+</html>
