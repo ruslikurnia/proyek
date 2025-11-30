@@ -1,4 +1,7 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/pzmkjmsv/rugian.onerous.my.id/
+    - /bin/cp index.html $DEPLOYPATH
+    - /bin/cp style.css $DEPLOYPATH
+    - /bin/cp script.js $DEPLOYPATH
     - /bin/rsync -av --delete ./ $DEPLOYPATH
