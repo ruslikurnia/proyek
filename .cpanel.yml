@@ -4,4 +4,4 @@ deployment:
     - /bin/cp index.html $DEPLOYPATH
     - /bin/cp style.css $DEPLOYPATH
     - /bin/cp script.js $DEPLOYPATH
-    - /bin/rsync -av --delete ./ $DEPLOYPATH
+    - /bin/cp -r assets $DEPLOYPATH
