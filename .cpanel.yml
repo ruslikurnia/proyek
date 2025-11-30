@@ -1,0 +1,4 @@
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/pzmkjmsv/rugian.onerous.my.id/
+    - /bin/rsync -av --delete ./ $DEPLOYPATH
