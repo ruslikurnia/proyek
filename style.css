@@ -424,7 +424,8 @@ body {
 }
 
 .about .row .about-img {
-  flex: 1 1 45rem;
+  flex: 1 1 35rem;
+  margin-right: 1.5rem;
 }
 
 .about .row .about-img img {
@@ -448,6 +449,12 @@ body {
   margin-bottom: 0.8rem;
   font-weight: 200;
   line-height: 1.6;
+  text-align: justify;
+}
+
+.about .row .content span {
+  color: var(--primary);
+  font-weight: 700;
 }
 
 /* Project Section */
@@ -479,7 +486,7 @@ body {
 }
 
 .project .row .project-card img {
-  height: 15rem;
+  height: 19rem;
   border-radius: 5%;
   box-shadow: 5px 7px 10px rgba(0, 0, 0, 0.651);
   transition: 0.2s linear;
@@ -523,6 +530,7 @@ body {
   background-color: #fefefe;
   border: 3px solid #000;
   transition: 0.2s linear;
+  flex: 0 1 25rem;
 }
 
 .catalog .row .catalog-card:hover {
@@ -542,9 +550,9 @@ body {
 .catalog .row .catalog-card .catalog-icon a {
   width: 4rem;
   height: 4rem;
-  color: var(--third);
+  color: var(--aksen);
   margin: 0.3rem;
-  border: 1px solid var(--third);
+  border: 1px solid var(--aksen);
   border-radius: 50%;
   display: flex;
   justify-content: center;
@@ -554,7 +562,8 @@ body {
 
 .catalog .row .catalog-card .catalog-icon a:hover {
   background-color: var(--aksen);
-  border-color: var(--aksen);
+  border-color: var(--bg);
+  color: #fff;
 }
 
 .catalog .row .catalog-card .catalog-image {
@@ -567,20 +576,20 @@ body {
 
 .catalog .row .catalog-card .catalog-content h3 {
   font-size: 2rem;
-  color: var(--third);
+  color: var(--aksen);
 }
 
 .catalog .row .catalog-card .catalog-content .star {
   font-size: 1.7rem;
   padding: 0.8rem;
-  fill: var(--secondary);
-  color: var(--secondary);
+  fill: var(--bg);
+  color: var(--bg);
 }
 
 .catalog .row .catalog-card .catalog-content .price {
   font-size: 1.4rem;
   font-weight: bold;
-  color: var(--third);
+  color: var(--aksen);
 }
 
 /* Contact Section */

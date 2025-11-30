@@ -1,12 +1,28 @@
 document.addEventListener("alpine:init", () => {
   Alpine.data("products", () => ({
     items: [
-      { id: 1, name: "Catalog 1", img: "cat1.jpg", price: 365000 },
-      { id: 2, name: "Catalog 2", img: "cat2.jpg", price: 405000 },
-      { id: 3, name: "Catalog 3", img: "cat3.jpg", price: 699000 },
-      { id: 4, name: "Catalog 4", img: "cat4.jpg", price: 388000 },
-      { id: 5, name: "Catalog 5", img: "cat5.jpg", price: 400000 },
-      
+      { id: 1, name: "1984", img: "1984.jpg", price: 102000 },
+      { id: 2, name: "Animal Farm", img: "animal-farm.jpg", price: 99000 },
+      { id: 3, name: "Madilog", img: "madilog.png", price: 144500 },
+      {
+        id: 4,
+        name: "Sejarah Dunia Yang Disembunyikan",
+        img: "sejarah-dunia.jpeg",
+        price: 148000,
+      },
+      {
+        id: 5,
+        name: "Socrates: Sebuah Pengantar Singkat",
+        img: "socrates.jpg",
+        price: 43000,
+      },
+      {
+        id: 6,
+        name: "The Metamorphosis",
+        img: "the-metamorphosis.jpg",
+        price: 87000,
+      },
+      { id: 7, name: "White Nights", img: "white-nights.jpg", price: 87000 },
     ],
   }));
 
@@ -82,29 +98,48 @@ const rupiah = (number) => {
 document.addEventListener("alpine:init", () => {
   Alpine.data("modalBox", () => ({
     items: [
-      { id: 1, name: "Catalog 1", img: "cat1.jpg", price: 365000 },
-      { id: 2, name: "Catalog 2", img: "cat2.jpg", price: 405000 },
-      { id: 3, name: "Catalog 3", img: "cat3.jpg", price: 699000 },
-      { id: 4, name: "Catalog 4", img: "cat4.jpg", price: 388000 },
-      { id: 5, name: "Catalog 5", img: "cat5.jpg", price: 400000 },
+      { id: 1, name: "1984", img: "1984.jpg", price: 102000 },
+      { id: 2, name: "Animal Farm", img: "animal-farm.jpg", price: 99000 },
+      { id: 3, name: "Madilog", img: "madilog.png", price: 144500 },
+      {
+        id: 4,
+        name: "Sejarah Dunia Yang Disembunyikan",
+        img: "sejarah-dunia.jpeg",
+        price: 148000,
+      },
+      {
+        id: 5,
+        name: "Socrates: Sebuah Pengantar Singkat",
+        img: "socrates.jpg",
+        price: 43000,
+      },
+      {
+        id: 6,
+        name: "The Metamorphosis",
+        img: "the-metamorphosis.jpg",
+        price: 87000,
+      },
+      { id: 7, name: "White Nights", img: "white-nights.jpg", price: 87000 },
     ],
     showModal(id) {
       // Close any currently open modal
-      const openModal = document.querySelector('.modal[style*="display: block"]');
+      const openModal = document.querySelector(
+        '.modal[style*="display: block"]'
+      );
       if (openModal) {
-        openModal.style.display = 'none';
+        openModal.style.display = "none";
       }
       // Show the new modal
       const modal = document.getElementById(`modal-${id}`);
       if (modal) {
-        modal.style.display = 'block';
+        modal.style.display = "block";
       }
     },
     closeModal(id) {
       const modal = document.getElementById(`modal-${id}`);
       if (modal) {
-        modal.style.display = 'none';
+        modal.style.display = "none";
       }
-    }
+    },
   }));
 });
